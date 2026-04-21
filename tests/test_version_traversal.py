@@ -1361,6 +1361,19 @@ class MergedPathTest(MigrationTest):
     def teardown_class(cls):
         clear_staging_env()
 
+    def test_downgrade_multiple_heads_remain(self):
+        self._assert_downgrade(
+            f"{self.c1.revision}",
+            (self.f.revision),
+            [
+                self.down_(self.f),
+                self.down_(self.e),
+                self.down_(self.c2),
+                self.down_(self.d1),
+            ],
+            {self.c1.revision},
+        )
+
     def test_stamp_down_across_merge_point_branch(self):
         heads = [self.e.revision]
         revs = self.env._stamp_revs(self.c2.revision, heads)
