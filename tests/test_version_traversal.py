@@ -1374,6 +1374,7 @@ class MergedPathTest(MigrationTest):
             {self.c1.revision},
         )
 
+
     def test_stamp_down_across_merge_point_branch(self):
         heads = [self.e.revision]
         revs = self.env._stamp_revs(self.c2.revision, heads)
